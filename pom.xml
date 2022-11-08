@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.bingecraft</groupId>
-    <artifactId>silent-join-quit</artifactId>
-    <version>32</version>
+    <artifactId>backend-silencer</artifactId>
+    <version>33</version>
     <packaging>jar</packaging>
 
-    <name>silent-join-quit</name>
+    <name>backend-silencer</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -17,7 +17,7 @@
     </properties>
 
     <build>
-        <finalName>silent-join-quit-${project.version}</finalName>
+        <finalName>backend-silencer-${project.version}</finalName>
         <plugins>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>

@@ -1,4 +1,4 @@
-package net.bingecraft.silent_join_quit;
+package net.bingecraft.backend_silencer;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;

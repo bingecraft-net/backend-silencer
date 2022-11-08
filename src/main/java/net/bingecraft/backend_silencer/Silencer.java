@@ -1,4 +1,4 @@
-package net.bingecraft.silent_join_quit;
+package net.bingecraft.backend_silencer;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.event.EventHandler;

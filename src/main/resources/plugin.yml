@@ -1,4 +1,4 @@
-name: silent-join-quit
+name: backend-silencer
 version: '${project.version}'
-main: net.bingecraft.silent_join_quit.Plugin
+main: net.bingecraft.backend_silencer.Plugin
 api-version: 1.19
