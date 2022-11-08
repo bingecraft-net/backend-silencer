@@ -10,6 +10,6 @@ public final class Plugin extends JavaPlugin {
     config.options().copyDefaults(true);
     saveConfig();
 
-    getServer().getPluginManager().registerEvents(new JoinQuitSilencer(), this);
+    getServer().getPluginManager().registerEvents(new Silencer(), this);
   }
 }
