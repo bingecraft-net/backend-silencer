@@ -9,5 +9,7 @@ public final class Plugin extends JavaPlugin {
     FileConfiguration config = getConfig();
     config.options().copyDefaults(true);
     saveConfig();
+
+    getServer().getPluginManager().registerEvents(new JoinQuitSilencer(), this);
   }
 }
