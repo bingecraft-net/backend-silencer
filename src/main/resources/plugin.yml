@@ -1,4 +1,4 @@
-name: nether-regions
+name: silent-join-quit
 version: '${project.version}'
-main: net.bingecraft.nether_regions.Plugin
+main: net.bingecraft.silent_join_quit.Plugin
 api-version: 1.19

@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.bingecraft</groupId>
-    <artifactId>nether-regions</artifactId>
-    <version>29</version>
+    <artifactId>silent-join-quit</artifactId>
+    <version>30</version>
     <packaging>jar</packaging>
 
-    <name>nether-regions</name>
+    <name>silent-join-quit</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -17,7 +17,7 @@
     </properties>
 
     <build>
-        <finalName>nether-regions-${version}</finalName>
+        <finalName>silent-join-quit-${version}</finalName>
         <plugins>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>

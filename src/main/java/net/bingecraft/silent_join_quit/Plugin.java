@@ -1,4 +1,4 @@
-package net.bingecraft.nether_regions;
+package net.bingecraft.silent_join_quit;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
