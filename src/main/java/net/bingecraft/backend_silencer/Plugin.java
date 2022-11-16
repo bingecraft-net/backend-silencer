@@ -1,19 +1,16 @@
 package net.bingecraft.backend_silencer;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Plugin extends JavaPlugin {
   @Override
   public void onEnable() {
-    FileConfiguration config = getConfig();
-    config.options().copyDefaults(true);
-    saveConfig();
+    Configuration configuration = new Configurator().getConfiguration(this);
+    Forwarder forwarder = new Forwarder(configuration);
+    Silencer silencer = new Silencer(forwarder);
 
     PluginManager pluginManager = getServer().getPluginManager();
-    Forwarder forwarder = new Forwarder("operator");
-    Silencer silencer = new Silencer(forwarder);
     pluginManager.registerEvents(silencer, this);
     pluginManager.registerEvents(forwarder, this);
   }

@@ -7,14 +7,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.Optional;
-
 public class Forwarder implements Listener {
-  private final String name;
+  private final Configuration configuration;
   private Player player;
 
-  public Forwarder(String name) {
-    this.name = name;
+  public Forwarder(Configuration configuration) {
+    this.configuration = configuration;
   }
 
   public void sendMessage(Component message) {
@@ -26,14 +24,14 @@ public class Forwarder implements Listener {
   @EventHandler
   private void onPlayerJoin(final PlayerJoinEvent event) {
     Player player = event.getPlayer();
-    if (player.getName().equals(name)) {
+    if (player.getName().equals(configuration.forwardToName)) {
       this.player = player;
     }
   }
 
   @EventHandler
   private void onPlayerQuit(final PlayerQuitEvent event) {
-    if (event.getPlayer().getName().equals(name)) {
+    if (event.getPlayer().getName().equals(configuration.forwardToName)) {
       player = null;
     }
   }
