@@ -8,7 +8,7 @@ public final class Plugin extends JavaPlugin {
   public void onEnable() {
     Configuration configuration = new Configurator().getConfiguration(this);
     Forwarder forwarder = new Forwarder(configuration);
-    Silencer silencer = new Silencer(forwarder);
+    Silencer silencer = new Silencer();
 
     PluginManager pluginManager = getServer().getPluginManager();
     pluginManager.registerEvents(silencer, this);
