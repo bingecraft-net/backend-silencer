@@ -1,0 +1,3 @@
+ssh bingecraft -- rm liminal/plugins/backend-silencer-*.jar
+scp target/backend-silencer-*.jar bingecraft:liminal/plugins
+ssh bingecraft -- systemctl --user restart liminal
