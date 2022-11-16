@@ -1,0 +1,3 @@
+ssh bingecraft -- rm marinade/plugins/backend-silencer-*.jar
+scp target/backend-silencer-*.jar bingecraft:marinade/plugins
+ssh bingecraft -- systemctl --user restart marinade
