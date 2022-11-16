@@ -7,9 +7,13 @@ public final class Configurator {
   public Configuration getConfiguration(JavaPlugin plugin) {
     FileConfiguration config = plugin.getConfig();
     config.addDefault("forwardToName", "playerNameToForwardCancelledEventsTo");
+    config.addDefault("port", 8080);
     config.options().copyDefaults(true);
     plugin.saveConfig();
 
-    return new Configuration(config.getString("forwardToName"));
+    return new Configuration(
+      config.getString("forwardToName"),
+      config.getInt("port")
+    );
   }
 }
