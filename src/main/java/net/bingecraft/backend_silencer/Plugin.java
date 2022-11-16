@@ -7,11 +7,11 @@ public final class Plugin extends JavaPlugin {
   @Override
   public void onEnable() {
     Configuration configuration = new Configurator().getConfiguration(this);
-    Forwarder forwarder = new Forwarder(configuration);
+    PlayerForwarder playerForwarder = new PlayerForwarder(configuration);
     Silencer silencer = new Silencer();
 
     PluginManager pluginManager = getServer().getPluginManager();
     pluginManager.registerEvents(silencer, this);
-    pluginManager.registerEvents(forwarder, this);
+    pluginManager.registerEvents(playerForwarder, this);
   }
 }

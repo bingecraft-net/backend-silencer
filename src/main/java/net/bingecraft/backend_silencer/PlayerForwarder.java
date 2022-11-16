@@ -9,11 +9,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class Forwarder implements Listener {
+public class PlayerForwarder implements Listener {
   private final Configuration configuration;
   private Player target;
 
-  public Forwarder(Configuration configuration) {
+  public PlayerForwarder(Configuration configuration) {
     this.configuration = configuration;
   }
 
