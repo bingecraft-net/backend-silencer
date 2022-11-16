@@ -21,10 +21,10 @@ public class Forwarder implements Listener {
   private void onPlayerJoin(final PlayerJoinEvent event) {
     Player player = event.getPlayer();
     if (player.getName().equals(configuration.forwardToName)) {
-      this.target = player;
+      target = player;
     }
 
-    String message = String.format("%s[%s] joined this backend", event.getPlayer().getName(), event.getPlayer().getAddress());
+    String message = String.format("%s[%s] joined this backend", player.getName(), player.getAddress());
     sendMessage(Component.text(message, NamedTextColor.RED));
   }
 
@@ -35,10 +35,11 @@ public class Forwarder implements Listener {
 
   @EventHandler
   private void onPlayerQuit(final PlayerQuitEvent event) {
-    String message = String.format("%s[%s] quit this backend", event.getPlayer().getName(), event.getPlayer().getAddress());
+    Player player = event.getPlayer();
+    String message = String.format("%s[%s] quit this backend", player.getName(), player.getAddress());
     sendMessage(Component.text(message, NamedTextColor.RED));
 
-    if (event.getPlayer().getName().equals(configuration.forwardToName)) {
+    if (player.getName().equals(configuration.forwardToName)) {
       target = null;
     }
   }
