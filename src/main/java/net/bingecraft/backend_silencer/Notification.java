@@ -2,16 +2,14 @@ package net.bingecraft.backend_silencer;
 
 import net.kyori.adventure.text.Component;
 
-public class Notification {
-  public enum Type {
-    PlayerDeath, PlayerAdvancementDone
-  }
+import java.util.UUID;
 
-  public final Type type;
+public class Notification {
+  public final UUID playerID;
   public final Component message;
 
-  public Notification(Type type, Component message) {
-    this.type = type;
+  public Notification(UUID playerID, Component message) {
+    this.playerID = playerID;
     this.message = message;
   }
 }

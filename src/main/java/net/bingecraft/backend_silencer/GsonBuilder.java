@@ -1,22 +1,20 @@
 package net.bingecraft.backend_silencer;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
+import com.google.gson.*;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.event.Listener;
 
 import java.lang.reflect.Type;
 
 public class GsonBuilder implements Listener {
   private static class ComponentSerializer implements JsonSerializer<Component> {
-    private final GsonComponentSerializer gsonComponentSerializer = GsonComponentSerializer.gson();
+    private final PlainTextComponentSerializer serializer = PlainTextComponentSerializer.plainText();
 
     @Override
     public JsonElement serialize(Component component, Type typeOfSrc, JsonSerializationContext context) {
-      return gsonComponentSerializer.serializeToTree(component);
+      return new JsonPrimitive(serializer.serialize(component));
     }
   }
 

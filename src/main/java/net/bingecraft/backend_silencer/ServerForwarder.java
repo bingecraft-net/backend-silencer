@@ -15,11 +15,11 @@ public class ServerForwarder implements Listener {
 
   @EventHandler
   private void onPlayerAdvancementDone(final PlayerAdvancementDoneEvent event) {
-    notificationServer.forward(new Notification(Notification.Type.PlayerAdvancementDone, event.message()));
+    notificationServer.forward(new Notification(event.getPlayer().getUniqueId(), event.message()));
   }
 
   @EventHandler
   private void onPlayerDeath(final PlayerDeathEvent event) {
-    notificationServer.forward(new Notification(Notification.Type.PlayerDeath, event.deathMessage()));
+    notificationServer.forward(new Notification(event.getPlayer().getUniqueId(), event.deathMessage()));
   }
 }
