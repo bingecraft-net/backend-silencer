@@ -16,21 +16,47 @@ public class NotificationServer implements Listener {
   private final Configuration configuration;
   private final Gson gson;
 
-  private ServerHandler serverHandler;
   private final EventLoopGroup parentGroup = new NioEventLoopGroup();
   private final EventLoopGroup childGroup = new NioEventLoopGroup();
+
+  private ChannelHandlerContext context;
 
   public NotificationServer(Configuration configuration, Gson gson) {
     this.configuration = configuration;
     this.gson = gson;
   }
 
-  private static class ServerHandler extends SimpleChannelInboundHandler<Object> {
-    protected ChannelHandlerContext context;
+  public void start(Plugin plugin, BukkitScheduler scheduler) {
+    scheduler.runTaskAsynchronously(plugin, this::run);
+  }
 
+  private void run() {
+    try {
+      new ServerBootstrap()
+        .group(parentGroup, childGroup)
+        .channel(NioServerSocketChannel.class)
+        .childHandler(new ChildHandler())
+        .bind(configuration.port)
+        .sync()
+        .channel()
+        .closeFuture()
+        .sync();
+    } catch (InterruptedException exception) {
+      throw new RuntimeException(exception);
+    }
+  }
+
+  private class ChildHandler extends ChannelInitializer<SocketChannel> {
     @Override
-    public void channelActive(ChannelHandlerContext context) {
-      this.context = context;
+    public void initChannel(SocketChannel channel) {
+      channel.pipeline().addLast(new ChannelActiveListener());
+    }
+  }
+
+  private class ChannelActiveListener extends SimpleChannelInboundHandler<Object> {
+    @Override
+    public void channelActive(ChannelHandlerContext _context) {
+      context = _context;
     }
 
     @Override
@@ -38,45 +64,19 @@ public class NotificationServer implements Listener {
     }
   }
 
-  public void start(Plugin plugin, BukkitScheduler scheduler) {
-    scheduler.runTaskAsynchronously(plugin, () -> {
-      try {
-        ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(parentGroup, childGroup)
-          .channel(NioServerSocketChannel.class)
-          .childHandler(new ChannelInitializer<SocketChannel>() {
-            @Override
-            public void initChannel(SocketChannel channel) {
-              serverHandler = new ServerHandler();
-              channel.pipeline().addLast(serverHandler);
-            }
-          });
-
-        ChannelFuture future = bootstrap.bind(configuration.port).sync();
-        future.channel().closeFuture().sync();
-      }
-      catch (InterruptedException exception) {
-        throw new RuntimeException(exception);
-      } finally {
-        parentGroup.shutdownGracefully();
-        childGroup.shutdownGracefully();
-      }
-    });
-  }
-
-  public void shutdownGracefully() {
-    parentGroup.shutdownGracefully();
-    childGroup.shutdownGracefully();
-  }
-
   public void forward(final Notification notification) {
-    if (serverHandler.context != null) {
-      serverHandler.context.writeAndFlush(
+    if (context != null) {
+      context.writeAndFlush(
         Unpooled.copiedBuffer(
           gson.toJson(notification),
           StandardCharsets.UTF_8
         )
       );
     }
+  }
+
+  public void shutdownGracefully() {
+    parentGroup.shutdownGracefully();
+    childGroup.shutdownGracefully();
   }
 }
