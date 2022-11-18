@@ -12,7 +12,7 @@ public final class Plugin extends JavaPlugin {
     Configuration configuration = new Configurator().getConfiguration(this);
     Server server = getServer();
 
-    notificationServer = new NotificationServer(configuration, GsonBuilder.create());
+    notificationServer = new NotificationServer(getSLF4JLogger(), configuration, GsonBuilder.create());
     notificationServer.start(this, server.getScheduler());
 
     ServerForwarder serverForwarder = new ServerForwarder(notificationServer);
