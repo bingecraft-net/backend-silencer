@@ -6,7 +6,7 @@
 
     <groupId>net.bingecraft</groupId>
     <artifactId>backend-silencer</artifactId>
-    <version>46</version>
+    <version>47</version>
     <packaging>jar</packaging>
 
     <name>backend-silencer</name>
