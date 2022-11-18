@@ -42,7 +42,7 @@ public class NotificationServer implements Listener {
         .closeFuture()
         .sync();
     } catch (InterruptedException exception) {
-      throw new RuntimeException(exception);
+      Thread.currentThread().interrupt();
     }
   }
 
@@ -55,12 +55,13 @@ public class NotificationServer implements Listener {
 
   private class ChannelActiveListener extends SimpleChannelInboundHandler<Object> {
     @Override
-    public void channelActive(ChannelHandlerContext _context) {
-      context = _context;
+    public void channelActive(ChannelHandlerContext newContext) {
+      context = newContext;
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) {
+      // discard incoming data
     }
   }
 
