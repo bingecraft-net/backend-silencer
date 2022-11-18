@@ -1,7 +1,8 @@
 # Backend Silencer
 
-Backend Silencer is a Minecraft server plugin that disables chat, join and quit messages. You're probably going to use this
-with a proxy-side plugin that handles chat, joins and quits instead like [Velocity Discord Relay](https://github.com/bingecraft-net/velocity-discord-relay).
+Backend Silencer is a Minecraft server plugin that silences game messages that are redundant with proxy messages . It
+also relays PlayerDeath and PlayerAdvancementDone messages back to the proxy. You're probably going to use this with a
+proxy-side plugin like [Velocity Discord Relay](https://github.com/bingecraft-net/velocity-discord-relay).
 
 ## demo
 
